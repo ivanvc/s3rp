@@ -5,11 +5,14 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/ivanvc/s3-proxy/pkg/config"
 
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
+
+	"github.com/ivanvc/s3-proxy/pkg/log"
 )
 
 type handler struct {
@@ -22,13 +25,23 @@ func newHandler(sess *session.Session) *handler {
 }
 
 func (h *handler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	t := time.Now()
+	status := http.StatusOK
 	resp, err := h.s3svc.GetObject(&s3.GetObjectInput{
 		Bucket: &config.Bucket,
 		Key:    h.getKey(req.URL),
 	})
+	defer func() {
+		if err != nil {
+			log.Logger.Printf("%d %v %s %s [%v]\n", status, time.Now().Sub(t), req.Method, req.URL.Path, err)
+		} else {
+			log.Logger.Printf("%d %v %s %s\n", status, time.Now().Sub(t), req.Method, req.URL.Path)
+		}
+	}()
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		status = http.StatusBadRequest
+		http.Error(w, err.Error(), status)
 		return
 	}
 

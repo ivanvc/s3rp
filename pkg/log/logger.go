@@ -1,12 +1,12 @@
 package log
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 var Logger *log.Logger
 
 func init() {
-	Logger = log.New(ioutil.Discard, "", 0)
+	Logger = log.New(os.Stdout, "", 0)
 }
