@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ivanvc/s3-proxy/pkg/config"
-	"github.com/ivanvc/s3-proxy/pkg/log"
+	"github.com/ivanvc/s3-reverse-proxy/pkg/config"
+	"github.com/ivanvc/s3-reverse-proxy/pkg/log"
 
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/ivanvc/s3-proxy/pkg/log"
+	"github.com/ivanvc/s3-reverse-proxy/pkg/log"
 )
 
 var (

@@ -1,4 +1,4 @@
-module github.com/ivanvc/s3-proxy
+module github.com/ivanvc/s3-reverse-proxy
 
 go 1.13
 
