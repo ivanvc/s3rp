@@ -11,7 +11,7 @@ import (
 
 // Serve starts the HTTP server.
 func Serve(sess *session.Session) {
-	http.Handle("/", newHandler(sess))
 	log.Logger.Println("Ready, listening on", config.Host)
-	log.Logger.Fatal(http.ListenAndServe(config.Host, nil))
+	log.Logger.Printf("Listening on %v\n", config.Host)
+	log.Logger.Fatal(http.ListenAndServe(config.Host, newProxy(sess)))
 }
