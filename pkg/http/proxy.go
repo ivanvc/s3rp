@@ -64,12 +64,11 @@ func (p *proxy) signedHeaders(req *http.Request) (map[string][]string, error) {
 }
 
 func (proxy) getURL(url *url.URL) *url.URL {
-	key := url.Path
-	if strings.HasSuffix(key, "/") {
-		key += config.IndexPage
+	path := url.Path
+	if strings.HasSuffix(path, "/") {
+		path += config.IndexPage
 	}
-	key = key[1:len(key)]
-	u, err := url.Parse("http://" + config.Bucket + ".s3.amazonaws.com/" + key)
+	u, err := url.Parse("http://" + config.Bucket + ".s3.amazonaws.com" + path)
 	if err != nil {
 		log.Logger.Println("Error generating URL", err.Error())
 	}
