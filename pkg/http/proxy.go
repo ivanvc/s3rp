@@ -5,7 +5,6 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"strings"
-	"time"
 
 	"github.com/ivanvc/s3-reverse-proxy/pkg/config"
 	"github.com/ivanvc/s3-reverse-proxy/pkg/log"
@@ -32,8 +31,7 @@ func newProxy(sess *session.Session) *proxy {
 }
 
 func (p *proxy) getDirector(req *http.Request) {
-	t := time.Now()
-	defer log.Logger.Printf("%v %s %s\n", time.Now().Sub(t), req.Method, req.URL.Path)
+	defer log.Logger.Printf("%s %s\n", req.Method, req.URL.Path)
 
 	req.URL = p.getURL(req.URL)
 	req.Host = req.URL.Host
