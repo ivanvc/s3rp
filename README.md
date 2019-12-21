@@ -11,7 +11,18 @@ exposed to the Internet. If you want to expose a full bucket, using the built-in
 S3 website would work better. Be aware that the contents of the buckets will be
 accessible through this server.
 
-## Configuration
+## Usage
+
+It can be used by using the Docker image [`ivan/s3-reverse-proxy`][docker], or
+can be installed using Go, by doing:
+
+```bash
+go install github.com/ivanvc/s3-reverse/proxy
+```
+
+[docker]: https://hub.docker.com/r/ivan/s3-reverse-proxy
+
+### Configuration
 
 It can be configured either with environment variables or passing arguments.
 
@@ -20,4 +31,20 @@ It can be configured either with environment variables or passing arguments.
   (default: `"index.html"`)
 * `S3_BUCKET`, or `-bucket <bucket>`: The bucket to proxy, mandatory
 
-## Usage
+Authentication with AWS is done by the AWS SDK. It can read environment
+variables, or your aws-cli credentials, instance role, etc.
+
+### Running
+
+If using docker, you can run it with (adjust values as required):
+
+```bash
+docker run -e S3_BUCKET=my-bucket -e AWS_REGION=us-west-2 AWS_ACCESS_KEY_ID=xx \
+AWS_SECRET_ACCESS_KEY=xx ivan/s3-reverse-proxy
+```
+
+Or directly with Go, by doing:
+
+```bash
+s3rp --s3-bucket=my-bucket
+```
