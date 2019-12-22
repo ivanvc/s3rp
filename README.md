@@ -29,7 +29,7 @@ It can be configured either with environment variables or passing arguments.
 * `HOST`, or `-host <host>`: The host to where listen to (default: `":8080"`)
 * `INDEX_PAGE` or `-index <index>`: The name of the index pages
   (default: `"index.html"`)
-* `S3_BUCKET`, or `-bucket <bucket>`: The bucket to proxy, mandatory
+* `BUCKET`, or `-bucket <bucket>`: The bucket to proxy, mandatory
 
 Authentication with AWS is done by the AWS SDK. It can read environment
 variables, or your aws-cli credentials, instance role, etc.
@@ -39,12 +39,12 @@ variables, or your aws-cli credentials, instance role, etc.
 If using docker, you can run it with (adjust values as required):
 
 ```bash
-docker run -e S3_BUCKET=my-bucket -e AWS_REGION=us-west-2 AWS_ACCESS_KEY_ID=xx \
+docker run -e BUCKET=my-bucket -e AWS_REGION=us-west-2 AWS_ACCESS_KEY_ID=xx \
 AWS_SECRET_ACCESS_KEY=xx ivan/s3-reverse-proxy
 ```
 
 Or directly with Go, by doing:
 
 ```bash
-s3rp --s3-bucket=my-bucket
+s3rp -bucket=my-bucket
 ```
