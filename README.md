@@ -17,7 +17,7 @@ It can be used by using the Docker image [`ivan/s3-reverse-proxy`][docker], or
 can be installed using Go, by doing:
 
 ```bash
-go install github.com/ivanvc/s3-reverse/proxy
+go install github.com/ivanvc/s3rp
 ```
 
 [docker]: https://hub.docker.com/r/ivan/s3-reverse-proxy
